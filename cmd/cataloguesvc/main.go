@@ -19,9 +19,9 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"github.com/microservices-demo/catalogue"
+	"github.com/DavidMealha/catalogue"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/weaveworks/common/middleware"
+	//"github.com/weaveworks/common/middleware"
 	"golang.org/x/net/context"
 )
 
