@@ -39,26 +39,26 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 		e.ListEndpoint,
 		decodeListRequest,
 		encodeListResponse,
-		append(options, httptransport.ServerBefore())...,
+		options...,
 	))
 	
 	r.Methods("GET").Path("/catalogue/size").Handler(httptransport.NewServer(
 		e.CountEndpoint,
 		decodeCountRequest,
 		encodeResponse,
-		append(options, httptransport.ServerBefore())...,
+		options...,
 	))
 	r.Methods("GET").Path("/catalogue/{id}").Handler(httptransport.NewServer(
 		e.GetEndpoint,
 		decodeGetRequest,
 		encodeGetResponse, // special case, this one can have an error
-		append(options, httptransport.ServerBefore())...,
+		options...,
 	))
 	r.Methods("GET").Path("/tags").Handler(httptransport.NewServer(
 		e.TagsEndpoint,
 		decodeTagsRequest,
 		encodeResponse,
-		append(options, httptransport.ServerBefore())...,
+		options...,
 	))
 	r.Methods("GET").PathPrefix("/catalogue/images/").Handler(http.StripPrefix(
 		"/catalogue/images/",
@@ -68,7 +68,7 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 		e.HealthEndpoint,
 		decodeHealthRequest,
 		encodeHealthResponse,
-		append(options, httptransport.ServerBefore())...,
+		options...,
 	))
 	r.Handle("/metrics", promhttp.Handler())
 	return r
