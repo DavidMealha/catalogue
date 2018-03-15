@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"strings"
+	//"strings"
 	"syscall"
 
 	"github.com/go-kit/kit/log"
 	//stdopentracing "github.com/opentracing/opentracing-go"
 	//zipkin "github.com/openzipkin/zipkin-go-opentracing"
 
-	"net"
+	//"net"
 	"net/http"
 
 	"path/filepath"
@@ -66,8 +66,8 @@ func main() {
 	var logger log.Logger
 	{
 		logger = log.NewLogfmtLogger(os.Stderr)
-		logger = log.With("ts", log.DefaultTimestampUTC)
-		logger = log.With("caller", log.DefaultCaller)
+		//logger = log.With(logger, "ts", log.DefaultTimestampUTC)
+		//logger = log.With(logger, "caller", log.DefaultCaller)
 	}
 
 	/*var tracer stdopentracing.Tracer

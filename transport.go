@@ -36,25 +36,28 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 	// GET /health		Health Check
 
 	r.Methods("GET").Path("/catalogue").Handler(httptransport.NewServer(
+		ctx,
 		e.ListEndpoint,
 		decodeListRequest,
 		encodeListResponse,
 		options...,
 	))
-	
 	r.Methods("GET").Path("/catalogue/size").Handler(httptransport.NewServer(
+		ctx,
 		e.CountEndpoint,
 		decodeCountRequest,
 		encodeResponse,
 		options...,
 	))
 	r.Methods("GET").Path("/catalogue/{id}").Handler(httptransport.NewServer(
+		ctx,
 		e.GetEndpoint,
 		decodeGetRequest,
 		encodeGetResponse, // special case, this one can have an error
 		options...,
 	))
 	r.Methods("GET").Path("/tags").Handler(httptransport.NewServer(
+		ctx,
 		e.TagsEndpoint,
 		decodeTagsRequest,
 		encodeResponse,
@@ -65,6 +68,7 @@ func MakeHTTPHandler(ctx context.Context, e Endpoints, imagePath string, logger 
 		http.FileServer(http.Dir(imagePath)),
 	))
 	r.Methods("GET").PathPrefix("/health").Handler(httptransport.NewServer(
+		ctx,
 		e.HealthEndpoint,
 		decodeHealthRequest,
 		encodeHealthResponse,
